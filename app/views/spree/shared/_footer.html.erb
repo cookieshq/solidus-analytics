@@ -1,0 +1,19 @@
+<footer id="footer" class="sixteen columns" data-hook>
+  <div id="footer-left" class="columns alpha eight" data-hook>
+    <p><%= Spree.t :powered_by  %> <%= link_to 'Solidus', 'http://solidus.io/' %></p>
+  </div>
+  <div id="footer-right" class="columns omega eight" data-hook></div>
+</footer>
+
+<script>
+window.segment_key = "<%= ENV['SEGMENT_KEY'] %>"
+if (<%= try_spree_current_user.present? %>) {
+  window.userID = <%= try_spree_current_user.try(:id) %>
+  window.userEmail = "<%= try_spree_current_user.try(:email) %>"
+  window.intercomHash = "<%= OpenSSL::HMAC.hexdigest('sha256', "#{ENV['INTERCOM_SECURE_SECRET_KEY']}", "#{try_spree_current_user.try(:id)}") %>"
+  window.logged_in_user = true
+} else {
+  window.logged_in_user = false
+}
+</script>
+
