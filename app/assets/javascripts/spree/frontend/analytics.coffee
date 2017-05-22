@@ -1,4 +1,3 @@
-console.log "indeed"
 $(document).ready ->
   !do ->
     analytics = window.analytics = window.analytics or []
